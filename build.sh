@@ -25,7 +25,7 @@ cd $NOOP_HOME
 
 [ -e build ] && mv build build_$(date +%Y%m%d_%H_%M_%d)
 make clean
-make -C $NOOP_HOME emu -j SIM_ARGS="" EMU_THREADS=$threads WITH_DRAMSIM3=1 EMU_TRACE=1 CONFIG=KunminghuV2Config 2>&1 | tee $pwd_tmp/.build.log
+make -C $NOOP_HOME emu -j$(nproc) SIM_ARGS="" EMU_THREADS=$threads WITH_DRAMSIM3=1 EMU_TRACE=1 CONFIG=KunminghuV2Config 2>&1 | tee $pwd_tmp/.build.log
 
 echo "========== make end at $(date) =========="
 
