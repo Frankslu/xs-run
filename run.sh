@@ -29,7 +29,6 @@ set_env
 # server_list="open06 open07 open08 open09 open10 open12 open13 open14 open15" #open23 open24 open25 open26 open27"
 ## big server
 server_list="node020 node021 node022 node023 node024 node025 node026 node027 node028 node029 node036 node037 node038 node039 node040" #node003 node004
-server_bad=0
 cpt_path=$cpt_path_2
 json_path=$cover3_path_2
 threads=16 # notice threads should keep same between build.sh and run.sh
@@ -43,11 +42,11 @@ fi
 
 echo "Checking servers..."
 for server in $server_list; do
-  ssh -o ConnectTimeout=20 -o BatchMode=yes "$server" "exit" &>/dev/null && echo "OK: $server" || { echo "FAIL: $server"; server_bad=1; } &
+  ssh -o ConnectTimeout=20 -o BatchMode=yes "$server" "exit" &>/dev/null && echo "OK: $server" || { echo "FAIL: $server"; touch server_bad; } &
 done
 wait
 
-[ $server_bad -eq 1 ] && { echo "server bad"; exit 1; } || echo "server good"
+[ -e server_bad ] && { echo "server bad"; rm server_bad; exit 1; } || echo "server good"
 
 echo "Done"
 
