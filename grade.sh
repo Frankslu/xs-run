@@ -40,4 +40,3 @@ echo "********** cal start at $(date) **********"
 cd $HOME/env-scripts/perf
 python3 xs_autorun_multiServer.py $cpt_path $json_path --xs $NOOP_HOME --threads $threads --dir $spec_dir --report > $NOOP_HOME/score-$spec_dir.log
 echo "********** cal end at $(date) **********"
-python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r $? --content "running spec test at dir: $spec_dir finish"
