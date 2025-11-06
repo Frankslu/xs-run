@@ -40,6 +40,7 @@ else
   spec_dir="SPEC06_EmuTasks_"$(date +%m%d_%H%M)
 fi
 
+rm server_bad
 echo "Checking servers..."
 for server in $server_list; do
   ssh -o ConnectTimeout=20 -o BatchMode=yes "$server" "exit" &>/dev/null && echo "OK: $server" || { echo "FAIL: $server"; touch server_bad; } &
