@@ -27,7 +27,7 @@ set_env
 ########## param: YOU SHOULD CONFIRM ##########
 if [[ $(hostname) == *"open"* ]]; then
 ## small server
-  server_list="open06 open07 open08 open09 open10 open12 open13 open14 open15" #open23 open24 open25 open26 open27"
+  server_list="open07 open08 open09 open10 open12 open13 open14 open15" #open23 open24 open25 open26 open27"
 elif [[ $(hostname) == *"node"* ]]; then
 ## big server
   server_list="node020 node021 node022 node023 node024 node025 node026 node027 node028 node029 node036 node037 node038 node039 node040" #node003 node004"
