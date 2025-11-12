@@ -22,7 +22,7 @@ function set_env(){
   cover3_path_2=$PERF_HOME/json/gcc12o3-incFpcOff-jeMalloc-0.3.json
   cover8_path_2=$PERF_HOME/json/gcc12o3-incFpcOff-jeMalloc-0.8.json
 }
-# set_env
+set_env
 
 ########## param: YOU SHOULD CONFIRM ##########
 if [[ $(hostname) == *"open"* ]]; then
