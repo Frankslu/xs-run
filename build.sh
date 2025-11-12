@@ -4,9 +4,9 @@ DIVLINE=$(perl -E "print '=' x 20")
 set -e
 pwd_tmp=$(pwd)
 function set_env(){
-    cd ../
-    . ./env.sh
-    cd XiangShan
+  cd ../
+  . ./env.sh
+  cd XiangShan
 }
 set_env
 
