@@ -1,7 +1,7 @@
 #!/bin/bash
+pwd_tmp=$(pwd)
 function func() {(
   set -e
-	pwd_tmp=$(pwd)
 	function set_env(){
 	  cd ../
 	  . ./env.sh
@@ -27,6 +27,12 @@ function func() {(
   make -C $NOOP_HOME emu -j$(( $(nproc) / 2 )) SIM_ARGS="" EMU_THREADS=$threads WITH_DRAMSIM3=1 EMU_TRACE=1 CONFIG=KunminghuV2Config 2>&1 | tee $pwd_tmp/.build.log
 
   echo "========== make end at $(date) =========="
+  touch $pwd_tmp/.build.succ
 )}
 func
-python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r $? --content "XiangShan build finish"
+if [ -e $pwd_tmp/.build.succ ]; then
+  python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r 0 --content "XiangShan build finish"
+  rm $pwd_tmp/.build.succ
+else
+  python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r 1 --content "XiangShan build fail"
+fi

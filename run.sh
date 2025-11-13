@@ -1,7 +1,7 @@
 #!/bin/bash
 ########## env ##########
+pwd_tmp=$(pwd)
 function func() {(
-	pwd_tmp=$(pwd)
 	set -e
 	function set_env(){
 	  cd ../
@@ -66,6 +66,12 @@ function func() {(
   cd $HOME/env-scripts/perf
   python3 xs_autorun_multiServer.py $cpt_path $json_path --xs $NOOP_HOME --threads $threads --dir $spec_dir --resume -L "$server_list" 2>&1 | tee $pwd_tmp/.run.log
   echo "********** cal end at $(date) **********"
+  touch $pwd_tmp/.build.succ
 )}
 func
-python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r $? --content "running spec test at dir: $spec_dir finish"
+if [ -e $pwd_tmp/.build.succ ]; then
+  python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r 0 --content "XiangShan run finish"
+  rm $pwd_tmp/.build.succ
+else
+  python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r 1 --content "XiangShan run fail"
+fi
