@@ -24,7 +24,8 @@ function func() {(
 
   [ -e build ] && mv build build.$(date +%Y%m%d_%H_%M_%d).tmp
   make clean
-  make -C $NOOP_HOME emu -j$(( $(nproc) / 2 )) SIM_ARGS="" EMU_THREADS=$threads WITH_DRAMSIM3=1 EMU_TRACE=1 CONFIG=KunminghuV2Config 2>&1 | tee $pwd_tmp/.build.log
+  make -C $NOOP_HOME emu -j$(( $(nproc) / 2 )) SIM_ARGS="" EMU_THREADS=$threads WITH_DRAMSIM3=1 EMU_TRACE=1 CONFIG=KunminghuV2Config \
+    1> >(tee build.log) 2> >(tee build.err)
 
   echo "========== make end at $(date) =========="
   touch $pwd_tmp/.build.succ
