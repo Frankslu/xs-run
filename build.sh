@@ -1,5 +1,6 @@
 #!/bin/bash
 pwd_tmp=$(pwd)
+[ -e $pwd_tmp/.build.succ ] && rm $pwd_tmp/.build.succ
 function func() {(
   set -e
 	function set_env(){
