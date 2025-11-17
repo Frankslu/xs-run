@@ -68,7 +68,7 @@ function func() {(
   echo "********** cal end at $(date) **********"
   touch $pwd_tmp/.build.succ
 )}
-func
+func $1
 if [ -e $pwd_tmp/.build.succ ]; then
   python3 /nfs/home/share/liyanqin/scripts/ShareAutoEmailAlert.py -r 0 --content "XiangShan run finish"
   rm $pwd_tmp/.build.succ
